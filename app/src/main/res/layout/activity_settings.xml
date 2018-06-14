@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible"
+    tools:context=".SettingsActivity"
+    tools:layout_editor_absoluteY="25dp">
+
+    <ScrollView
+        android:id="@+id/settingsScroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                android:visibility="visible"
+                ads:adSize="BANNER"
+                ads:adUnitId="ca-app-pub-5689777634096933/5149995963" />
+
+            <TextView
+                android:id="@+id/timesLoggedInLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Logged you in" />
+
+            <TextView
+                android:id="@+id/timesLoggedIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="128 times"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/colorAccent"
+                android:textSize="80sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="50dp"
+                android:layout_marginTop="200dp"
+                android:layout_weight="1"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/settingsLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Settings"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                    android:id="@+id/usernameLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Username" />
+
+                <EditText
+                    android:id="@+id/usernameField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/usernameLabel"
+                    android:ems="10"
+                    android:focusedByDefault="false"
+                    android:inputType="textPersonName"
+                    android:selectAllOnFocus="false"
+                    android:singleLine="true"
+                    android:text="Loading.." />
+
+                <TextView
+                    android:id="@+id/passwordLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Password" />
+
+                <EditText
+                    android:id="@+id/passwordField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:focusedByDefault="false"
+                    android:inputType="textPassword"
+                    android:text="Loading.." />
+
+                <Switch
+                    android:id="@+id/switch1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:focusedByDefault="false"
+                    android:text="Start captive portal checker on startup" />
+
+                <Button
+                    android:id="@+id/manualRun"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusedByDefault="false"
+                    android:onClick="DetectCaptivePortal"
+                    android:text="Manually Run" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>
