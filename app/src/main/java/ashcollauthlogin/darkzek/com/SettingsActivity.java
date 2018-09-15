@@ -1,10 +1,14 @@
 package ashcollauthlogin.darkzek.com;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ScrollView;
@@ -14,23 +18,35 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
-import ashcollauthlogin.darkzek.com.CaptivePortalSystem.CaptivePortalCheckerService;
+import ashcollauthlogin.darkzek.com.R;
+import ashcollauthlogin.darkzek.com.CaptivePortalSystem.CaptivePortalManager;
 
 public class SettingsActivity extends AppCompatActivity {
 
     private AdView mAdView;
+
+    private AshcollAutoLogin main = AshcollAutoLogin.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
-
+        AshcollAutoLogin.getInstance().createNotificationChannel(this);
 
         //Check if its their first time
         if (getSharedPreferences("credentials", MODE_PRIVATE).contains("username")) {
             //Already setup!
-            setContentView(R.layout.activity_settings);
+
+            //Setup wifi listener
+            AshcollAutoLogin.SetupWifiListener(getApplicationContext());
+
+            //For some reason android throws a bunch of random errors here
+            try {
+                setContentView(R.layout.activity_settings);
+            } catch (Exception e) {
+
+            }
 
             //Set the scroll to the top
             ScrollView v = findViewById(R.id.settingsScroll);
@@ -41,10 +57,15 @@ public class SettingsActivity extends AppCompatActivity {
             return;
         }
 
+        AshcollAutoLogin.checkLocationServices(this, this);
+
         //Load the credentials
         LoadCredentials();
-        loadAd();
         DetectTextChange();
+    }
+
+    public boolean onUnhandledKeyEvent (View v, KeyEvent event) {
+        return true;
     }
 
     public void LoadCredentials() {
@@ -73,10 +94,19 @@ public class SettingsActivity extends AppCompatActivity {
         EditText username = findViewById(R.id.usernameField);
         EditText password = findViewById(R.id.passwordField);
 
+        password.setInputType(129);
+
         username.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void afterTextChanged(Editable s) {
+
+                if (username.getText().toString().equalsIgnoreCase("")) {
+                    //Invalid!
+                    ((EditText)findViewById(R.id.usernameField)).setError("This field can not be blank!");
+                    return;
+                }
+
                 getSharedPreferences("credentials", MODE_PRIVATE).edit().putString("username", username.getText().toString()).apply();
             }
 
@@ -94,6 +124,13 @@ public class SettingsActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+
+                if (password.getText().toString().equalsIgnoreCase("")) {
+                    //Invalid!
+                    ((EditText)findViewById(R.id.passwordField)).setError("This field can not be blank!");
+                    return;
+                }
+
                 getSharedPreferences("credentials", MODE_PRIVATE).edit().putString("password", password.getText().toString()).apply();
             }
 
@@ -106,23 +143,56 @@ public class SettingsActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
     //Button pressed
     public void DetectCaptivePortal(View view) {
-        DetectCaptivePortal();
+        ManuallyRun(view.getContext());
     }
 
-    public void DetectCaptivePortal() {
-        Intent MyIntentService = new Intent(this, CaptivePortalCheckerService.class);
-
-        startService(MyIntentService);
-    }
 
     public void LoadLoginActivity() {
         Intent myIntent = new Intent(this, LoginActivity.class);
         startActivity(myIntent);
 
         finish();
+    }
+
+    private void ManuallyRun(Context context) {
+        String usernameText = getSharedPreferences("credentials", MODE_PRIVATE).getString("username", "DEFAULT");
+        String passwordText = getSharedPreferences("credentials", MODE_PRIVATE).getString("password", "DEFAULT");
+
+        //Login
+        LoginResponse response = CaptivePortalManager.getInstance().Login(usernameText, passwordText, this);
+
+        switch (response) {
+            case SUCCESS: {
+                main.sendNotification("Success!", "Successfully logged you into the schools WiFi!", context);
+                break;
+            }
+            case NO_INTERNET: {
+                main.sendNotification("Error!", "You must be connected to the schools WiFi for this app to work!", context);
+                break;
+            }
+            case LOGIN_PAGE_UNACCESSABLE: {
+                main.sendNotification("Error!", "Couldnt access the login page! Try toggling airplane mode on then off again", context);
+                break;
+            }
+            case UNKNOWN_ERROR: {
+                main.sendNotification("Error!", "An unknown error occured! Please try again later", context);
+                break;
+            }
+            case ALREADY_LOGGED_IN: {
+                main.sendNotification("Error!", "You're already logged into the WiFi! Try again when you're not", context);
+                break;
+            }
+            default: {
+                main.sendNotification("Error!", "Something unknown happened to your login request! Try double checking your username and password", context);
+            }
+        }
+
+        //Afterwards load ad (when we have internet)
+        loadAd();
     }
 }

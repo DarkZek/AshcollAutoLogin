@@ -41,7 +41,7 @@
                 android:id="@+id/timesLoggedInLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Logged you in" />
+                android:text="@string/settings_loggedin_label" />
 
             <TextView
                 android:id="@+id/timesLoggedIn"
@@ -67,7 +67,7 @@
                     android:id="@+id/settingsLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Settings"
+                    android:text="@string/settings_title"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
                 <View
@@ -81,7 +81,7 @@
                     android:id="@+id/usernameLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Username" />
+                    android:text="@string/settings_username_label" />
 
                 <EditText
                     android:id="@+id/usernameField"
@@ -93,13 +93,13 @@
                     android:inputType="textPersonName"
                     android:selectAllOnFocus="false"
                     android:singleLine="true"
-                    android:text="Loading.." />
+                    android:text="@string/settings_loading_placeholder" />
 
                 <TextView
                     android:id="@+id/passwordLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Password" />
+                    android:text="@string/settings_password_label" />
 
                 <EditText
                     android:id="@+id/passwordField"
@@ -108,23 +108,17 @@
                     android:ems="10"
                     android:focusedByDefault="false"
                     android:inputType="textPassword"
-                    android:text="Loading.." />
-
-                <Switch
-                    android:id="@+id/switch1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:focusedByDefault="false"
-                    android:text="Start captive portal checker on startup" />
+                    android:text="@string/settings_loading_placeholder" />
 
                 <Button
                     android:id="@+id/manualRun"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/blueColor"
                     android:focusedByDefault="false"
                     android:onClick="DetectCaptivePortal"
-                    android:text="Manually Run" />
+                    android:text="@string/settings_run_button"
+                    android:textColor="@android:color/white" />
 
             </LinearLayout>
 

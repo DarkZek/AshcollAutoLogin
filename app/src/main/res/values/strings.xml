@@ -4,6 +4,17 @@
 
     <!-- Strings related to Settings -->
 
+    <string name="settings_loading_placeholder">"Loading.."</string>
+    <string name="settings_run_button">Manually Run</string>
+    <string name="settings_title">Settings</string>
+    <string name="settings_username_label">Username</string>
+    <string name="settings_password_label">Password</string>
+    <string name="settings_loggedin_label">Logged you in</string>
+
+
+
+
+
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>
 

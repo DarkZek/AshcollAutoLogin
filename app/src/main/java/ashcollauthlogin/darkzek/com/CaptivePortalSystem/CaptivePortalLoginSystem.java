@@ -1,6 +1,8 @@
 package ashcollauthlogin.darkzek.com.CaptivePortalSystem;
 
+import android.annotation.TargetApi;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -39,13 +41,13 @@ class CaptivePortalLoginSystem extends AsyncTask<String, Void, String> {
             URL url = new URL("http://172.16.160.1:1000/");
             URLConnection con = url.openConnection();
             HttpURLConnection http = (HttpURLConnection)con;
+            http.setDoOutput(true);
             http.setRequestMethod("POST"); // PUT is another valid option
 
-            StringJoiner sj = new StringJoiner("&");
+            String m = "";
             for(Map.Entry<String,String> entry : arguments.entrySet())
-                sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "="
-                        + URLEncoder.encode(entry.getValue(), "UTF-8"));
-            byte[] out = sj.toString().getBytes(StandardCharsets.UTF_8);
+                m += URLEncoder.encode(entry.getKey(), "UTF-8") + "=" + URLEncoder.encode(entry.getValue(), "UTF-8") + "&";
+            byte[] out = m.getBytes();
             int length = out.length;
 
             http.setFixedLengthStreamingMode(length);

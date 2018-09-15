@@ -2,7 +2,6 @@ package ashcollauthlogin.darkzek.com;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import ashcollauthlogin.darkzek.com.CaptivePortalSystem.CaptivePortalCheckerService;
+import ashcollauthlogin.darkzek.com.R;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -30,23 +29,17 @@ public class LoginActivity extends AppCompatActivity {
         //Check if a username was put in
         if (usernameText.equalsIgnoreCase("")) {
             //Invalid!
-            ((EditText)findViewById(R.id.usernameField)).setBackgroundColor(Color.RED);
+            ((EditText)findViewById(R.id.usernameField)).setError("This field can not be blank!");
             return;
         }
-        //Reset background if its ok
-        ((EditText)findViewById(R.id.usernameField)).setBackgroundColor(Color.TRANSPARENT);
 
         if (passwordText.equalsIgnoreCase("")) {
             //Invalid!
-            ((EditText)findViewById(R.id.passwordField)).setBackgroundColor(Color.RED);
+            ((EditText)findViewById(R.id.passwordField)).setError("This field can not be blank!");
             return;
         }
 
         SaveCredentials(usernameText, passwordText);
-
-        Intent MyIntentService = new Intent(this, CaptivePortalCheckerService.class);
-
-        startService(MyIntentService);
 
         Log.i("Started", "Started");
 
