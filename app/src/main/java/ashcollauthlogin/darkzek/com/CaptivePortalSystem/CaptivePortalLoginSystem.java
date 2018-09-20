@@ -1,8 +1,6 @@
 package ashcollauthlogin.darkzek.com.CaptivePortalSystem;
 
-import android.annotation.TargetApi;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -14,10 +12,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.StringJoiner;
 
 class CaptivePortalLoginSystem extends AsyncTask<String, Void, String> {
 
@@ -42,7 +38,7 @@ class CaptivePortalLoginSystem extends AsyncTask<String, Void, String> {
             URLConnection con = url.openConnection();
             HttpURLConnection http = (HttpURLConnection)con;
             http.setDoOutput(true);
-            http.setRequestMethod("POST"); // PUT is another valid option
+            http.setRequestMethod("POST");
 
             String m = "";
             for(Map.Entry<String,String> entry : arguments.entrySet())

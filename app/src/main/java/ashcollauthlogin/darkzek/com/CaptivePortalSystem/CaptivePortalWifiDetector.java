@@ -8,7 +8,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import ashcollauthlogin.darkzek.com.AshcollAutoLogin;
-import ashcollauthlogin.darkzek.com.AshcollAutoLogin;
 import ashcollauthlogin.darkzek.com.LoginResponse;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -22,33 +21,17 @@ public class CaptivePortalWifiDetector extends BroadcastReceiver {
         return instance;
     }
 
-    public boolean initilized = false;
+    public boolean initialized = false;
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        AshcollAutoLogin.instance.sendNotification("Title", "Detected", context);
 
         ConnectivityManager conn =  (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = conn.getActiveNetworkInfo();
 
         if (networkInfo != null && networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
-
-            //Just connected to WiFi!
-            String ssid = AshcollAutoLogin.getSSID(context);
-
-            if (ssid == "<unknown ssid>") {
-
-                SharedPreferences.Editor editor = context.getSharedPreferences("credentials", MODE_PRIVATE).edit();
-
-                editor.putBoolean("location_notification", true);
-
-                editor.commit();
-
-                AshcollAutoLogin.instance.sendNotification("Cannot access SSID",
-                        "AshcollAutoLogin cannot access your SSID when Location Services are disabled. Please enable location services or AshcollAutoLogin will try log you into all WiFi connections.", context);
-            } else if (!ssid.equalsIgnoreCase("Student_BYOD")) {
-                AshcollAutoLogin.getInstance().sendNotification("Not school: " + ssid, "Yay", context);
-                //return;
-            }
 
             DetectedWifi(context);
             return;
@@ -56,11 +39,8 @@ public class CaptivePortalWifiDetector extends BroadcastReceiver {
     }
 
     public void DetectedWifi(Context context) {
-
         String usernameText = context.getSharedPreferences("credentials", MODE_PRIVATE).getString("username", "DEFAULT");
         String passwordText = context.getSharedPreferences("credentials", MODE_PRIVATE).getString("password", "DEFAULT");
-
-        AshcollAutoLogin.getInstance().sendNotification("Logging you in!", "doing it", context);
 
         LoginResponse login = CaptivePortalManager.getInstance().Login(usernameText, passwordText, context);
 

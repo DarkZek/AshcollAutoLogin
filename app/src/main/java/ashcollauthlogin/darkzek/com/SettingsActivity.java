@@ -2,6 +2,11 @@ package ashcollauthlogin.darkzek.com;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,6 +23,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
+import ashcollauthlogin.darkzek.com.CaptivePortalSystem.CaptivePortalWifiDetector;
 import ashcollauthlogin.darkzek.com.R;
 import ashcollauthlogin.darkzek.com.CaptivePortalSystem.CaptivePortalManager;
 
@@ -27,6 +33,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private AshcollAutoLogin main = AshcollAutoLogin.getInstance();
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -57,15 +64,22 @@ public class SettingsActivity extends AppCompatActivity {
             return;
         }
 
-        AshcollAutoLogin.checkLocationServices(this, this);
-
+        loadAd();
         //Load the credentials
         LoadCredentials();
         DetectTextChange();
-    }
 
-    public boolean onUnhandledKeyEvent (View v, KeyEvent event) {
-        return true;
+        ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        Network[] activeNetworks=connectivityManager.getAllNetworks();
+        for(Network network:activeNetworks){
+            if(connectivityManager.getNetworkInfo(network).isConnected()){
+                NetworkCapabilities networkCapabilities=connectivityManager.getNetworkCapabilities(network);
+                if(networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL)){
+                    ManuallyRun(this);
+                }
+                break;
+            }
+        }
     }
 
     public void LoadCredentials() {
@@ -85,6 +99,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
+
         mAdView.loadAd(adRequest);
 
     }
