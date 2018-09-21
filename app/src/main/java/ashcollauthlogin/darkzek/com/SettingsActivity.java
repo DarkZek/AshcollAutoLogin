@@ -168,7 +168,7 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     public void LoadLoginActivity() {
-        Intent myIntent = new Intent(this, LoginActivity.class);
+        Intent myIntent = new Intent(this, IntroActivity.class);
         startActivity(myIntent);
 
         finish();

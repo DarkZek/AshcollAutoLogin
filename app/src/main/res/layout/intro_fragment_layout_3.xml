@@ -1,36 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/intro_background"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="394dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="52dp"
-            android:text="WiFi Login Username/Password"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@color/blueColor"
-            app:layout_constraintBottom_toTopOf="@+id/usernameField"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/divider2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:text="@string/intro_fragment_3_title"
+            android:textColor="@android:color/white"
+            android:textSize="28sp"
+            android:paddingBottom="50dp"/>
 
         <TextView
             android:id="@+id/usernameLabel"
@@ -38,7 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView"
             android:layout_centerHorizontal="true"
-            android:text="Username" />
+            android:text="School Username"
+            android:textColor="@android:color/white" />
 
         <EditText
             android:id="@+id/usernameField"
@@ -49,6 +43,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:singleLine="true"
+            android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:hint="Username"
@@ -58,7 +53,8 @@
             android:id="@+id/passwordLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Password" />
+            android:text="School Password"
+            android:textColor="@android:color/white" />
 
         <EditText
             android:id="@+id/passwordField"
@@ -69,27 +65,13 @@
             android:ems="10"
             android:inputType="textVisiblePassword"
             android:singleLine="true"
+            android:textColor="@android:color/white"
             app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/usernameField"
             tools:hint="Password" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
-            android:background="@color/blueColor"
-            android:onClick="onContinueClick"
-            android:text="Continue"
-            android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.4"
-            app:layout_constraintStart_toStartOf="parent" />
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</FrameLayout>
