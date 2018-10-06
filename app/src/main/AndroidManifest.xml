@@ -18,21 +18,11 @@
         android:theme="@style/AppTheme">
         <activity android:name=".IntroActivity" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".MainActivity"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".AutomaticLogin"
-            android:label="@string/title_activity_automatic_login"
-            android:theme="@style/AppTheme">
-
-            <intent-filter>
-                <action android:name="android.net.conn.CAPTIVE_PORTAL" />
-                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>

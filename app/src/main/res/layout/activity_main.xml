@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="visible"
-    tools:context=".SettingsActivity"
+    tools:context=".MainActivity"
+    android:padding="20dp"
     tools:layout_editor_absoluteY="25dp">
 
     <ScrollView

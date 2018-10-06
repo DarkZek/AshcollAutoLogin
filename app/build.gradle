@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
@@ -18,7 +19,7 @@ android {
     }
     productFlavors {
     }
-    buildToolsVersion '27.0.3'
+    buildToolsVersion '28.0.2'
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -30,4 +31,8 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.1'
     implementation 'com.google.android.gms:play-services-ads:15.0.1'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

@@ -1,6 +1,6 @@
-package ashcollauthlogin.darkzek.com;
+package ashcollauthlogin.darkzek.com
 
-public enum LoginResponse {
+enum class LoginResponse {
     SUCCESS,
     ALREADY_LOGGED_IN,
     LOGIN_PAGE_UNACCESSABLE,
