@@ -1,8 +1,6 @@
 package ashcollauthlogin.darkzek.com.CaptivePortalSystem
 
 import android.content.Context
-import android.net.wifi.WifiInfo
-import android.net.wifi.WifiManager
 
 object CaptivePortalFunctions {
     fun IncreaseLoginCount(context: Context) {

@@ -8,7 +8,6 @@ import java.io.IOException
 import java.io.InputStreamReader
 import java.net.MalformedURLException
 import java.net.URL
-import java.net.URLConnection
 
 //Returns the login page HTML code - or null if there is no middle man attack or any errors
 internal class CaptivePortalLoginPageLocater : AsyncTask<Void, Void, String>() {

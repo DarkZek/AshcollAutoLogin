@@ -28,7 +28,7 @@
             android:layout_height="125dp"
             android:layout_gravity="center"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_action_name" />
+            android:src="@drawable/ic_signal_wifi_4_bar_lock_black_24dp" />
 
         <TextView
             android:id="@+id/description"

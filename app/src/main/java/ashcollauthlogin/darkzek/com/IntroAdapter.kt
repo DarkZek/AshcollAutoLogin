@@ -8,11 +8,13 @@ import android.support.v4.app.FragmentPagerAdapter
 class IntroAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
-        return if (position % 2 == 0) {
-            IntroFragment.newInstance(Color.parseColor("#03A9F4"), position) // blue
-        } else {
-            IntroFragment.newInstance(Color.parseColor("#4CAF50"), position) // green
+        when (position) {
+            0 -> return IntroFragment.newInstance(Color.parseColor("#03A9F4"), position) // blue
+            1 -> return IntroFragment.newInstance(Color.parseColor("#4CAF50"), position) // green
+            2 -> return IntroFragment.newInstance(Color.parseColor("#df6142"), position) // orange
         }
+
+        return IntroFragment.newInstance(Color.parseColor("#df6142"), position) // orange
     }
 
     override fun getCount(): Int {

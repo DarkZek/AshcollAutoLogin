@@ -1,6 +1,5 @@
 package ashcollauthlogin.darkzek.com
 
-import android.app.Activity
 import android.support.v4.view.ViewPager
 import android.view.View
 

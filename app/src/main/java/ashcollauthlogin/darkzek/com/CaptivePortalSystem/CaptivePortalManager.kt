@@ -3,11 +3,8 @@ package ashcollauthlogin.darkzek.com.CaptivePortalSystem
 
 import android.content.Context
 import android.util.Log
-
-import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-import ashcollauthlogin.darkzek.com.AshcollAutoLogin
 import ashcollauthlogin.darkzek.com.LoginResponse
 
 class CaptivePortalManager private constructor() {

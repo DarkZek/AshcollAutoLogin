@@ -17,6 +17,8 @@ import ashcollauthlogin.darkzek.com.CaptivePortalSystem.CaptivePortalWifiDetecto
 
 class AshcollAutoLogin private constructor() {
 
+    //TODO: Pretty sure it's broken in Android Pie - needs more testing
+
     @JvmOverloads
     fun sendNotification(title: String, content: String, context: Context, id: Int = Random().nextInt(1000)): Notification {
 

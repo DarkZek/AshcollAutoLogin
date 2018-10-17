@@ -53,14 +53,14 @@ class MainActivity : AppCompatActivity() {
             v.requestFocus()
 
         } else {
-            LoadLoginActivity()
+            loadLoginActivity()
             return
         }
 
         loadAd()
         //Load the credentials
-        LoadCredentials()
-        DetectTextChange()
+        loadCredentials()
+        detectTextChange()
 
         val connectivityManager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetworks = connectivityManager.allNetworks
@@ -68,14 +68,14 @@ class MainActivity : AppCompatActivity() {
             if (connectivityManager.getNetworkInfo(network).isConnected) {
                 val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
                 if (networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL)) {
-                    ManuallyRun(this)
+                    manuallyRun(this)
                 }
                 break
             }
         }
     }
 
-    fun LoadCredentials() {
+    private fun loadCredentials() {
 
         val usernameText = getSharedPreferences("credentials", Context.MODE_PRIVATE).getString("username", "DEFAULT")
         val passwordText = getSharedPreferences("credentials", Context.MODE_PRIVATE).getString("password", "DEFAULT")
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         (findViewById<View>(R.id.timesLoggedIn) as TextView).text = timesLoggedIn.toString() + " times"
     }
 
-    fun loadAd() {
+    private fun loadAd() {
         MobileAds.initialize(this,
                 "ca-app-pub-5689777634096933~5341567652")
 
@@ -97,11 +97,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun DetectTextChange() {
+    private fun detectTextChange() {
 
         val username = findViewById<EditText>(R.id.usernameField)
         val password = findViewById<EditText>(R.id.passwordField)
 
+        //Set the password area to a password area
         password.inputType = 129
 
         username.addTextChangedListener(object : TextWatcher {
@@ -117,13 +118,8 @@ class MainActivity : AppCompatActivity() {
                 getSharedPreferences("credentials", Context.MODE_PRIVATE).edit().putString("username", username.text.toString()).apply()
             }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int, two: Int, three: Int) {
-
-            }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { }
+            override fun onTextChanged(s: CharSequence, start: Int, two: Int, three: Int) { }
         })
 
         password.addTextChangedListener(object : TextWatcher {
@@ -139,31 +135,26 @@ class MainActivity : AppCompatActivity() {
                 getSharedPreferences("credentials", Context.MODE_PRIVATE).edit().putString("password", password.text.toString()).apply()
             }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int, two: Int, three: Int) {
-
-            }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { }
+            override fun onTextChanged(s: CharSequence, start: Int, two: Int, three: Int) { }
         })
 
     }
 
     //Button pressed
     fun DetectCaptivePortal(view: View) {
-        ManuallyRun(view.context)
+        manuallyRun(view.context)
     }
 
 
-    fun LoadLoginActivity() {
+    private fun loadLoginActivity() {
         val myIntent = Intent(this, IntroActivity::class.java)
         startActivity(myIntent)
 
         finish()
     }
 
-    private fun ManuallyRun(context: Context) {
+    private fun manuallyRun(context: Context) {
         val usernameText = getSharedPreferences("credentials", Context.MODE_PRIVATE).getString("username", "DEFAULT")
         val passwordText = getSharedPreferences("credentials", Context.MODE_PRIVATE).getString("password", "DEFAULT")
 
@@ -178,10 +169,10 @@ class MainActivity : AppCompatActivity() {
                 main.sendNotification("Error!", "You must be connected to the schools WiFi for this app to work!", context)
             }
             LoginResponse.LOGIN_PAGE_UNACCESSABLE -> {
-                main.sendNotification("Error!", "Couldnt access the login page! Try toggling airplane mode on then off again", context)
+                main.sendNotification("Error!", "Couldn't access the login page! Try toggling airplane mode on then off again", context)
             }
             LoginResponse.UNKNOWN_ERROR -> {
-                main.sendNotification("Error!", "An unknown error occured! Please try again later", context)
+                main.sendNotification("Error!", "An unknown error occurred! Please try again later", context)
             }
             LoginResponse.ALREADY_LOGGED_IN -> {
                 main.sendNotification("Error!", "You're already logged into the WiFi! Try again when you're not", context)
