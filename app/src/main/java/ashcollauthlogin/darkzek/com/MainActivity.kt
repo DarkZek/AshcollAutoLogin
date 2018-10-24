@@ -14,6 +14,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ScrollView
 import android.widget.TextView
+import android.widget.Toast
 
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
@@ -24,7 +25,7 @@ import ashcollauthlogin.darkzek.com.CaptivePortalSystem.CaptivePortalManager
 class MainActivity : AppCompatActivity() {
 
     private var mAdView: AdView? = null
-
+    private var notificationTimeout: Int = 10
     private val main = AshcollAutoLogin.getInstance()
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             //Already setup!
 
             //Setup wifi listener
-            AshcollAutoLogin.SetupWifiListener(applicationContext)
+            AshcollAutoLogin.setupWifiListener(applicationContext)
 
             //For some reason android throws a bunch of random errors here
             try {
@@ -62,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         loadCredentials()
         detectTextChange()
 
+        //Check if we should run
         val connectivityManager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetworks = connectivityManager.allNetworks
         for (network in activeNetworks) {
@@ -87,8 +89,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadAd() {
-        MobileAds.initialize(this,
-                "ca-app-pub-5689777634096933~5341567652")
+        MobileAds.initialize(this, "ca-app-pub-5689777634096933~5341567652")
 
         mAdView = findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()
@@ -142,7 +143,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Button pressed
-    fun DetectCaptivePortal(view: View) {
+    fun detectCaptivePortal(view: View) {
         manuallyRun(view.context)
     }
 
@@ -163,26 +164,31 @@ class MainActivity : AppCompatActivity() {
 
         when (response) {
             LoginResponse.SUCCESS -> {
-                main.sendNotification("Success!", "Successfully logged you into the schools WiFi!", context)
+                notifyUser("Success!", "Successfully logged into the Student_BYOD", context)
             }
             LoginResponse.NO_INTERNET -> {
-                main.sendNotification("Error!", "You must be connected to the schools WiFi for this app to work!", context)
+                notifyUser("Error!", "You must be connected to the schools WiFi for this app to work!", context)
             }
             LoginResponse.LOGIN_PAGE_UNACCESSABLE -> {
-                main.sendNotification("Error!", "Couldn't access the login page! Try toggling airplane mode on then off again", context)
+                notifyUser("Error!", "Couldn't access the login page! Try toggling airplane mode on then off again", context)
             }
             LoginResponse.UNKNOWN_ERROR -> {
-                main.sendNotification("Error!", "An unknown error occurred! Please try again later", context)
+                notifyUser("Error!", "An unknown error occurred! Please try again later", context)
             }
             LoginResponse.ALREADY_LOGGED_IN -> {
-                main.sendNotification("Error!", "You're already logged into the WiFi! Try again when you're not", context)
+                notifyUser("Error!", "You're already logged into the WiFi! Try again when you're not", context)
             }
             else -> {
-                main.sendNotification("Error!", "Something unknown happened to your login request! Try double checking your username and password", context)
+                notifyUser("Error!", "Something unknown happened to your login request! Try double checking your username and password", context)
             }
         }
 
         //Afterwards load ad (when we have internet)
         loadAd()
+    }
+
+    private fun notifyUser(message: String, description: String, context: Context) {
+        main.sendTimedNotification(message, description, context, notificationTimeout)
+        Toast.makeText(this, "$message $description", Toast.LENGTH_LONG).show()
     }
 }

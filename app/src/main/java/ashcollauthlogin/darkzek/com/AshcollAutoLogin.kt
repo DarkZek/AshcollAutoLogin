@@ -48,7 +48,7 @@ class AshcollAutoLogin private constructor() {
         h.postDelayed({
             val notificationManager = NotificationManagerCompat.from(context)
             notificationManager.cancel(404)
-        }, time.toLong())
+        }, time.toLong() * 1000)
     }
 
     fun createNotificationChannel(context: Context) {
@@ -57,7 +57,7 @@ class AshcollAutoLogin private constructor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "CaptivePortalAlerts"
             val description = "Alerts for connecting to your captive portal"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val importance = NotificationManager.IMPORTANCE_HIGH
             val channel = NotificationChannel("CaptivePortalAlerts", name, importance)
             channel.description = description
 
@@ -70,14 +70,13 @@ class AshcollAutoLogin private constructor() {
     companion object {
 
         //TODO: Make the captive portal detection work on all android versions
-
         var _instance = AshcollAutoLogin()
 
         fun getInstance(): AshcollAutoLogin {
             return _instance
         }
 
-        fun SetupWifiListener(context: Context) {
+        fun setupWifiListener(context: Context) {
 
             val intentFilter = IntentFilter()
 

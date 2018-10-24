@@ -117,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/blueColor"
                     android:focusedByDefault="false"
-                    android:onClick="DetectCaptivePortal"
+                    android:onClick="detectCaptivePortal"
                     android:text="@string/settings_run_button"
                     android:textColor="@android:color/white" />
 
