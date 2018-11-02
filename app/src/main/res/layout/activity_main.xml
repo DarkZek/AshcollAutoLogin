@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="visible"
-    tools:context=".SettingsActivity"
+    tools:context=".MainActivity"
+    android:padding="20dp"
     tools:layout_editor_absoluteY="25dp">
 
     <ScrollView
@@ -41,13 +42,13 @@
                 android:id="@+id/timesLoggedInLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Logged you in" />
+                android:text="@string/settings_loggedin_label" />
 
             <TextView
                 android:id="@+id/timesLoggedIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="128 times"
+                android:text="0 times"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@color/colorAccent"
                 android:textSize="80sp" />
@@ -56,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="50dp"
-                android:layout_marginTop="200dp"
+                android:layout_marginTop="100dp"
                 android:layout_weight="1"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
@@ -67,7 +68,7 @@
                     android:id="@+id/settingsLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Settings"
+                    android:text="@string/settings_title"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
                 <View
@@ -81,7 +82,7 @@
                     android:id="@+id/usernameLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Username" />
+                    android:text="@string/settings_username_label" />
 
                 <EditText
                     android:id="@+id/usernameField"
@@ -93,13 +94,13 @@
                     android:inputType="textPersonName"
                     android:selectAllOnFocus="false"
                     android:singleLine="true"
-                    android:text="Loading.." />
+                    android:text="@string/settings_loading_placeholder" />
 
                 <TextView
                     android:id="@+id/passwordLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Password" />
+                    android:text="@string/settings_password_label" />
 
                 <EditText
                     android:id="@+id/passwordField"
@@ -108,23 +109,17 @@
                     android:ems="10"
                     android:focusedByDefault="false"
                     android:inputType="textPassword"
-                    android:text="Loading.." />
-
-                <Switch
-                    android:id="@+id/switch1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:focusedByDefault="false"
-                    android:text="Start captive portal checker on startup" />
+                    android:text="@string/settings_loading_placeholder" />
 
                 <Button
                     android:id="@+id/manualRun"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/blueColor"
                     android:focusedByDefault="false"
-                    android:onClick="DetectCaptivePortal"
-                    android:text="Manually Run" />
+                    android:onClick="detectCaptivePortal"
+                    android:text="@string/settings_run_button"
+                    android:textColor="@android:color/white" />
 
             </LinearLayout>
 

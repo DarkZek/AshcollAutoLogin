@@ -66,3 +66,6 @@ fastlane/readme.md
 /.project
 gradle/
 app/release/
+
+build.gradle
+app/build.gradle
