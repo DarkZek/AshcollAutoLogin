@@ -9,3 +9,10 @@ Ashcoll Auto Login first pings the Mozilla captive portal detector - which redir
 ## How can I get it
 Now available on Google Play!
 https://play.google.com/store/apps/details?id=ashcollauthlogin.darkzek.com
+
+<div class="row">
+  <img src="images/Image 1.png" alt="Promotional Picture 1" width="200"/>
+  <img src="images/Image 2.png" alt="Promotional Picture 2" width="200"/>
+  <img src="images/Image 3.png" alt="Promotional Picture 3" width="200"/>
+  <img src="images/Image 4.png" alt="Promotional Picture 4" width="200"/>
+</div>
