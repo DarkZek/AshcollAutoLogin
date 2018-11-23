@@ -2,24 +2,33 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'key0'
+            storeFile file('/home/darkzek/Documents/AndroidAppKey')
+            keyPassword '2rKaetags4tBPhWhqgGB4jhd8U6VgV'
+            storePassword '2rKaetags4tBPhWhqgGB4jhd8U6VgV'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "ashcollauthlogin.darkzek.com"
         minSdkVersion 14
         targetSdkVersion 27
-        versionCode 3
-        versionName "3"
+        versionCode 5
+        versionName "5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.config
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     productFlavors {
     }
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

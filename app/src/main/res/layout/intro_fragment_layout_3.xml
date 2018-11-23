@@ -31,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView"
+            android:textColor="@android:color/white"
             android:layout_centerHorizontal="true"
             android:text="School Username" />
 
@@ -48,6 +49,7 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:hint="Username"
             tools:layout_editor_absoluteY="103dp"
+            android:backgroundTint="@android:color/white"
             android:textColorHighlight="@android:color/white"/>
 
         <TextView
@@ -67,6 +69,7 @@
             android:inputType="textVisiblePassword"
             android:singleLine="true"
             android:textColor="@android:color/white"
+            android:backgroundTint="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/usernameField"
