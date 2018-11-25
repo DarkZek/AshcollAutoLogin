@@ -27,7 +27,7 @@ class AshcollAutoLogin private constructor() {
                 .setSmallIcon(R.drawable.ic_stat_name)
                 .setContentTitle(title)
                 .setContentText(content)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
                 .setStyle(NotificationCompat.BigTextStyle())
         mBuilder.build()
 

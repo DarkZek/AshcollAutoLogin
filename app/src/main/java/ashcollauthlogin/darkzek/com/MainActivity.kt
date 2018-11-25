@@ -188,7 +188,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun notifyUser(message: String, description: String, context: Context) {
-        main.sendTimedNotification(message, description, context, notificationTimeout)
+        //main.sendTimedNotification(message, description, context, notificationTimeout)
         Toast.makeText(this, "$message $description", Toast.LENGTH_LONG).show()
     }
 }

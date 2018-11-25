@@ -36,7 +36,8 @@
                 android:layout_weight="1"
                 android:visibility="visible"
                 ads:adSize="BANNER"
-                ads:adUnitId="ca-app-pub-5689777634096933/5149995963" />
+                ads:adUnitId="ca-app-pub-5689777634096933/5149995963"
+                android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:id="@+id/timesLoggedInLabel"
@@ -57,7 +58,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="50dp"
-                android:layout_marginTop="100dp"
                 android:layout_weight="1"
                 android:focusable="true"
                 android:focusableInTouchMode="true"

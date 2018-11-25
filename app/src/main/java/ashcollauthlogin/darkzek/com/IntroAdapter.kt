@@ -11,10 +11,10 @@ class IntroAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         when (position) {
             0 -> return IntroFragment.newInstance(Color.parseColor("#03A9F4"), position) // blue
             1 -> return IntroFragment.newInstance(Color.parseColor("#4CAF50"), position) // green
-            2 -> return IntroFragment.newInstance(Color.parseColor("#df6142"), position) // orange
+            2 -> return IntroFragment.newInstance(Color.parseColor("#03A9F4"), position) // blue
         }
 
-        return IntroFragment.newInstance(Color.parseColor("#df6142"), position) // orange
+        return IntroFragment.newInstance(Color.parseColor("#03A9F4"), position) // blue
     }
 
     override fun getCount(): Int {
