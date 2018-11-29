@@ -43,7 +43,7 @@ class AutomaticLogin : AppCompatActivity() {
                 main.sendNotification("Error!", "You must be connected to the schools WiFi for this app to work!", context)
             }
             LoginResponse.LOGIN_PAGE_UNACCESSABLE -> {
-                main.sendNotification("Error!", "Couldnt access the login page! Try toggling airplane mode on then off again", context)
+                main.sendNotification("Error!", "Couldn't access the login page! Try toggling airplane mode on then off again", context)
             }
             LoginResponse.UNKNOWN_ERROR -> {
                 main.sendNotification("Error!", "An unknown error occured! Please try again later", context)
