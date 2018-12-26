@@ -9,6 +9,9 @@ import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
 import ashcollauthlogin.darkzek.com.CaptivePortalSystem.CaptivePortalManager
+import android.content.Intent
+import android.net.Uri
+
 
 class AutomaticLogin : AppCompatActivity() {
     private val main = AshcollAutoLogin.getInstance()
@@ -46,7 +49,8 @@ class AutomaticLogin : AppCompatActivity() {
                 main.sendNotification("Error!", "Couldn't access the login page! Try toggling airplane mode on then off again", context)
             }
             LoginResponse.UNKNOWN_ERROR -> {
-                main.sendNotification("Error!", "An unknown error occured! Please try again later", context)
+                val myIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://detectportal.firefox.com/success.txt"))
+                startActivity(myIntent)
             }
             LoginResponse.ALREADY_LOGGED_IN -> {
                 main.sendNotification("Error!", "You're already logged into the WiFi! Try again when you're not", context)

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
@@ -173,7 +174,8 @@ class MainActivity : AppCompatActivity() {
                 notifyUser("Error!", "Couldn't access the login page! Try toggling airplane mode on then off again", context)
             }
             LoginResponse.UNKNOWN_ERROR -> {
-                notifyUser("Error!", "An unknown error occurred! Please try again later", context)
+                val myIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://detectportal.firefox.com/success.txt"))
+                startActivity(myIntent)
             }
             LoginResponse.ALREADY_LOGGED_IN -> {
                 notifyUser("Error!", "You're already logged into the WiFi! Try again when you're not", context)
